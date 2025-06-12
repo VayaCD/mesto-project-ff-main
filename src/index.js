@@ -3,6 +3,7 @@ import { initialCards as cardsArray } from './scripts/cards';
 import { closeModal } from './components/modal'
 import { openModal } from './components/modal';
 import { createCard } from './components/card';
+import { like } from './components/card';
 
 const popupNewCard = document.querySelector(".popup_type_new-card");
 const popupEditCard = document.querySelector(".popup_type_edit");
@@ -62,11 +63,6 @@ function openImg(link, name) {
   popupCaption.textContent = name;
   openModal(popupImageCard);
 }
-
-function like(e) {
-  e.target.classList.toggle('card__like-button_is-active')
-}
-
 
 function handleRenameSubmit(evt) {
   evt.preventDefault();

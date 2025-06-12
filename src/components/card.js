@@ -8,6 +8,7 @@ export function createCard(item, like, openImg) {
     const likeBtn = cardElement.querySelector('.card__like-button');
 
     cardElement.querySelector(".card__image").src = item.link;
+    cardElement.querySelector(".card__image").alt = item.name;
     cardElement.querySelector(".card__title").textContent = item.name;
     deleteButton.addEventListener("click", deleteCard);
 
@@ -18,4 +19,8 @@ export function createCard(item, like, openImg) {
     });
 
     return cardElement;
+}
+
+export function like(e) {
+    e.target.classList.toggle('card__like-button_is-active')
 }
