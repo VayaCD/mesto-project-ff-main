@@ -70,6 +70,7 @@ export function clearValidation(formElement, validationConfig) {
     const buttonElement = formElement.querySelector(validationConfig.submitButtonSelector);
 
     inputList.forEach((inputElement) => {
+        inputElement.setCustomValidity("");
         hideInputError(formElement, inputElement, validationConfig);
     });
 

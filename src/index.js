@@ -77,10 +77,13 @@ function handleAvatarSubmit(evt) {
   updateAvatar(avatarInput.value)
     .then((user) => {
       profImage.style.backgroundImage = `url('${user.avatar}')`;
+      closeModal(popupAvatar);
+    })
+    .catch((error) => {
+      console.error('Ошибка при обновлении аватара:', error);
     })
     .finally(() => {
       submitButton.textContent = 'Сохранить';
-      closeModal(popupAvatar);
     });
 }
 
@@ -92,12 +95,14 @@ function handleRenameSubmit(evt) {
     .then((user) => {
       profTitle.textContent = user.name;
       profDescr.textContent = user.about;
-      profImage.style.backgroundImage = `url('${user.avatar}')`;
+      closeModal(popupEditCard);
     })
     .finally(() => {
       submitButton.textContent = 'Сохранить';
-      closeModal(popupEditCard);
-    });
+    })
+    .catch(error => {
+      console.error('Ошибка при обновлении информации о пользователе:', error);
+  });
 }
 
 function handleAddCardSubmit(evt) {
@@ -107,14 +112,16 @@ function handleAddCardSubmit(evt) {
   if (imgName.value && imgLink.value) {
     apiAddCard(imgName.value, imgLink.value)
       .then((json) => {
-        json.owner = { _id: currentUserId };
         const cardElement = createCard(json, openImg, currentUserId);
         cardsList.prepend(cardElement);
+        closeModal(popupNewCard);
       })
       .finally(() => {
         submitButton.textContent = 'Сохранить';
-        closeModal(popupNewCard);
-      });
+      })
+      .catch(error => {
+        console.error('Ошибка при добавлении карточки:', error);
+    });
   }
 }
 
